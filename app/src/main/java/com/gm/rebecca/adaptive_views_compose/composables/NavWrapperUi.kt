@@ -1,12 +1,10 @@
 package com.gm.rebecca.adaptive_views_compose.composables
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -29,14 +27,10 @@ fun NavigationWrapperUi(
     navController: NavHostController = rememberNavController(),
     viewModel: MainViewModel = viewModel()
 ) {
-    val scope = rememberCoroutineScope()
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    val closeDrawer: () -> Unit = { scope.launch { drawerState.close() } }
-
     if (navigationType == NavigationType.PERMANENT_NAVIGATION_DRAWER) {
         PermanentNavigationDrawer(
             drawerContent = {
-                PermanentDrawerSheet(Modifier.fillMaxWidth(0.5f)) {
+                PermanentDrawerSheet(Modifier.fillMaxWidth(0.25f)) {
                     NavigationDrawerContent(
                         navController = navController
                     )
@@ -52,29 +46,12 @@ fun NavigationWrapperUi(
             )
         }
     } else {
-        ModalNavigationDrawer(
-            drawerContent = {
-                NavigationDrawerContent(
-                    navController = navController,
-                    onDrawerClicked = {
-                        closeDrawer
-                    }
-                )
-            },
-            drawerState = drawerState
-        ) {
             AppContent(
                 navigationType = navigationType,
                 modifier = modifier,
                 navController = navController,
                 viewModel = viewModel,
-                onDrawerClicked = {
-                    scope.launch {
-                        drawerState.open()
-                    }
-                },
                 contentType = contentType
             )
         }
     }
-}
