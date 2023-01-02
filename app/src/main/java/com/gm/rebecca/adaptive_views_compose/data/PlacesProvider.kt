@@ -2,7 +2,8 @@ package com.gm.rebecca.adaptive_views_compose.data
 
 import com.google.android.gms.maps.model.LatLng
 
-object PlacesProvider {
+object
+PlacesProvider {
     val places = mutableListOf(
         Place(
             name = "Roman Colosseum",
@@ -17,10 +18,10 @@ object PlacesProvider {
             latLng = LatLng(48.860294, 2.33862)
         ),
         Place(
-            name = "Tikal National Park",
-            location = "Northern Guatemala's Petén Province",
-            description = "Tikal is a major Pre-Columbian political, economic and military center, and one of the most important archaeological complexes left by the Maya civilization.",
-            latLng = LatLng(17.21714,  -89.623253)
+            name = "Chichén Itzá",
+            location = "Yucatan, Mexico",
+            description = "An ancient Maya city ruins, occupying 4 square miles, thought to have been a religious, military, political, and commercial center that at its peak would have been home to 35,000 people.",
+            latLng = LatLng(20.66667,  -88.56667)
         ),
         Place(
             name = "Petra",

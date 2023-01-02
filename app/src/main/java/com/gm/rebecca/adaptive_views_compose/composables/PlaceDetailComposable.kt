@@ -1,15 +1,20 @@
 package com.gm.rebecca.adaptive_views_compose.composables
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -17,25 +22,38 @@ import androidx.compose.ui.unit.sp
 import com.gm.rebecca.adaptive_views_compose.R
 import com.gm.rebecca.adaptive_views_compose.data.Place
 import com.gm.rebecca.adaptive_views_compose.util.LocationUtils
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MapStyleOptions
+import com.google.android.gms.maps.model.*
 import com.google.maps.android.compose.*
 
 @Composable
 fun PlaceDetailComposable(
     modifier: Modifier,
     place: Place = Place(
-        name = "National Gallery of Art",
-        location = "Washington, D.C.",
-        description = "Identified as one of the largest and most influential museums of modern art in the world",
+        name = "",
+        location = "",
+        description = "",
         latLng = LatLng(40.761509, -73.978271),
     )
 ) {
+    val position = LocationUtils.getPlaceLocation(place)
     val cameraPositionState = rememberCameraPositionState()
     cameraPositionState.position = CameraPosition.fromLatLngZoom(
-        LocationUtils.getPlaceLocation(place), 11f
+        position, 11f
     )
+    val mapStyleOptions = MapStyleOptions.loadRawResourceStyle(
+        LocalContext.current, R.raw.style_json
+    )
+    val mapProperties by remember {
+        mutableStateOf(mapStyleOptions)
+    }
+    // Drawing on the map is accomplished with a child-based API
+    val markerClick: (Marker) -> Boolean = {
+        Log.d("becca", "${it.title} was clicked")
+        cameraPositionState.projection?.let { projection ->
+            Log.d("becca", "The current projection is: $projection")
+        }
+        false
+    }
 
     Column(
         modifier = modifier
@@ -51,37 +69,35 @@ fun PlaceDetailComposable(
         )
         Spacer(modifier = Modifier.padding(vertical = 2.dp))
 
-        Text(
-            text = AnnotatedString(text = place.description),
-            style = TextStyle(
-                fontFamily = FontFamily.Serif,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium
-            ),
-        )
-        Spacer(modifier = Modifier.padding(vertical = 2.dp))
-
         Box(
             modifier = Modifier
                 .clip(
                     RoundedCornerShape(
                         bottomEnd = 10.dp,
-                        bottomStart = 10.dp
+                        bottomStart = 10.dp,
+                        topEnd = 10.dp,
+                        topStart = 10.dp
                     )
                 ),
         ) {
             GoogleMap(
                 modifier = Modifier.fillMaxSize(),
                 cameraPositionState = cameraPositionState,
-                properties = MapProperties(
-                    mapStyleOptions = MapStyleOptions.loadRawResourceStyle(
-                        LocalContext.current, R.raw.style_json)
-                ),
+                properties = MapProperties(mapStyleOptions = mapProperties),
                 uiSettings = MapUiSettings(zoomControlsEnabled = true)
             ) {
                 Marker(
-                    state = MarkerState(position = LocationUtils.getPlaceLocation(place)),
-                    title = place.name
+                    state = MarkerState(position = position)
+                )
+                MarkerInfoWindow(
+                    state = MarkerState(position),
+                    icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE),
+                    title = place.name,
+                    snippet = place.description,
+                    onClick = markerClick,
+                    content = {
+                        CustomInfoWindow(title = it.title, description = it.snippet)
+                    }
                 )
             }
         }
