@@ -1,4 +1,4 @@
-package com.gm.rebecca.adaptive_views_compose.composables
+package com.gm.rebecca.adaptive_views_compose.navigation
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.MaterialTheme

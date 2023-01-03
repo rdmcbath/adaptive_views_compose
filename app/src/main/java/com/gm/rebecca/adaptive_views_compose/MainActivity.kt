@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -17,7 +16,6 @@ import com.gm.rebecca.adaptive_views_compose.ui.theme.UiTheme
 import com.gm.rebecca.adaptive_views_compose.util.DevicePosture.*
 import com.gm.rebecca.adaptive_views_compose.util.isBookPosture
 import com.gm.rebecca.adaptive_views_compose.util.isSeparating
-import com.google.android.gms.location.FusedLocationProviderClient
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn

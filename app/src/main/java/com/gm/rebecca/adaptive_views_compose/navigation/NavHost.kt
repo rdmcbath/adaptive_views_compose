@@ -1,4 +1,4 @@
-package com.gm.rebecca.adaptive_views_compose.composables
+package com.gm.rebecca.adaptive_views_compose.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -8,6 +8,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.gm.rebecca.adaptive_views_compose.MainViewModel
+import com.gm.rebecca.adaptive_views_compose.composables.DeletedPlacesScreen
+import com.gm.rebecca.adaptive_views_compose.composables.PlaceDetailScreen
+import com.gm.rebecca.adaptive_views_compose.composables.PlacesScreen
+import com.gm.rebecca.adaptive_views_compose.composables.ProfileScreen
 import com.gm.rebecca.adaptive_views_compose.util.ContentType
 import com.gm.rebecca.adaptive_views_compose.util.Screen
 

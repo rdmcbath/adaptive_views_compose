@@ -3,10 +3,7 @@ package com.gm.rebecca.adaptive_views_compose.composables
 import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material.Text
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,7 +24,7 @@ import com.google.maps.android.compose.*
 
 @Composable
 fun PlaceDetailComposable(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     place: Place = Place(
         name = "",
         location = "",

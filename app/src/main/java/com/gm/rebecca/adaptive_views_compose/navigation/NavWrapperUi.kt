@@ -1,17 +1,16 @@
-package com.gm.rebecca.adaptive_views_compose.composables
+package com.gm.rebecca.adaptive_views_compose.navigation
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.gm.rebecca.adaptive_views_compose.MainViewModel
+import com.gm.rebecca.adaptive_views_compose.composables.AppContent
 import com.gm.rebecca.adaptive_views_compose.util.ContentType
 import com.gm.rebecca.adaptive_views_compose.util.NavigationType
-import kotlinx.coroutines.launch
 
 /*Wrapper that uses navigationType to determine placement of navigation rail or
 bottom navigation to implement dynamic navigation on different devices.
