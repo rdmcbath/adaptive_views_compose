@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun ProfileScreen() {
     Text(
-        text = "Profile goes here! Nothing yet 🤪",
+        text = "Profile goes here! Nothing yet \uD83E\uDDD1",
         modifier = Modifier.fillMaxSize().padding(32.dp),
         fontSize = 21.sp,
         fontWeight = FontWeight.Medium,

@@ -11,18 +11,6 @@ import androidx.compose.material.icons.outlined.Home
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.gm.rebecca.adaptive_views_compose.R
 
-//sealed class Screen(val route: String) {
-//    object Places : Screen("places")
-//
-//    object PlaceDetail : Screen("places/{placeIndex}") {
-//        fun createRoute(index: Int) = "places/$index"
-//    }
-//
-//    object DeletedPlaces : Screen("deletedPlaces")
-//
-//    object Profile : Screen("profile")
-//}
-
 sealed class Screen(
     val route: String,
     @StringRes val label: Int?,

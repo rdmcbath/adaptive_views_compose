@@ -29,7 +29,7 @@ fun DeletedPlacesScreen(
         DeletedPlacesComposable(deletedPlaces = places)
     } else {
         Text(
-            text = "No Deleted Places! 🤪",
+            text = "No Deleted Places yet \uD83D\uDC48",
             modifier = Modifier.fillMaxSize().padding(32.dp),
             fontSize = 21.sp,
             fontWeight = FontWeight.Medium,
